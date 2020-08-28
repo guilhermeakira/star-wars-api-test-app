@@ -7,6 +7,8 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 
+import messages from './messages';
+
 const StyledButton = styled(Button)`
   padding: ${({ theme }) => theme.spacing(2, 9)};
 `;
@@ -19,16 +21,19 @@ export const Home = () => {
       <Box display="flex" flexDirection="column" alignItems="center">
         <Box mt={26} mb={1}>
           <Typography color="primary" variant="h1">
-            Welcome to test-app
+            {messages.welcomeText}
+            <b>
+              {messages.appName}
+            </b>
           </Typography>
         </Box>
         <Typography color="primary" variant="subtitle2">
-          FRONTEND CHALLENGE
+          {messages.frontendChallenge}
         </Typography>
         <Box mt={20}>
           <StyledButton href="/result" variant="contained" color="primary" theme={theme}>
             <Typography variant="button">
-              S t a r t
+              {messages.buttonLabel}
             </Typography>
           </StyledButton>
         </Box>

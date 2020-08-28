@@ -5,7 +5,7 @@ import Home from '..';
 describe('Home', () => {
   it('renders heading', () => {
     const { getByText } = render(<Home />);
-    const heading = getByText('Welcome to test-app');
+    const heading = getByText('Welcome to');
     expect(heading).toBeInTheDocument();
   });
 
