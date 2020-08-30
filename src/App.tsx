@@ -20,7 +20,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <MasterContext.Provider value={master}>
-        <Router>
+        <Router basename="/star-wars-api-test-app">
             <Switch>
               <Route path="/result">
                 <Result />
