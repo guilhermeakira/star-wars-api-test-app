@@ -1,4 +1,3 @@
-
 interface StringMap { [key: string]: string; }
 
 const messages: StringMap = {
