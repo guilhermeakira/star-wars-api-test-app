@@ -8,8 +8,8 @@ const useFetch = (shouldFetch: boolean = true, initialMaster: string = '') => {
   useEffect(() => {
     const fetchData = async () => {
       setStatus(FETCH_STATUS.FETCHING);
-      const fetchLuke = fetch('http://swapi.dev/api/people/1/', { method: 'GET' });
-      const fetchVader = fetch('http://swapi.dev/api/people/4/', { method: 'GET' });
+      const fetchLuke = fetch('https://swapi.dev/api/people/1/', { method: 'GET' });
+      const fetchVader = fetch('https://swapi.dev/api/people/4/', { method: 'GET' });
       const response = await Promise.race([fetchLuke, fetchVader]);
 
       const data = await response.json();
