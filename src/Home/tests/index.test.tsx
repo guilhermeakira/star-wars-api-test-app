@@ -17,7 +17,7 @@ describe('Home', () => {
 
   it('renders button', () => {
     const { getByText } = render(<Home />);
-    const linkButton = getByText('S t a r t').closest('button');
-    expect(linkButton).toBeInTheDocument();
+    const button = getByText('S t a r t').closest('button');
+    expect(button).toBeInTheDocument();
   });
 });
