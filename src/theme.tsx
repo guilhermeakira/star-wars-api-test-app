@@ -33,6 +33,7 @@ export const theme = createMuiTheme({
       },
     },
     subtitle1: {
+      'textAlign': 'center',
       'fontSize': '2.25em',
       'lineHeight': '1.25em',
     },

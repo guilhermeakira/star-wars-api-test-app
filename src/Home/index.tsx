@@ -10,6 +10,7 @@ import { useTheme } from '@material-ui/core/styles';
 import messages from './messages';
 import useFetch from '../Hooks/useFetch';
 import masterContext from '../State/MasterContext';
+import { FETCH_STATUS } from '../constants'
 
 const StyledButton = styled(Button)`
   padding: ${({ theme }) => theme.spacing(2, 7)};
@@ -26,7 +27,7 @@ export const Home = () => {
   const [shouldFetch, setShouldFetch] = useState(false);
   const { setCurrentMaster } = useContext(masterContext);
 
-  const { masterName } = useFetch(shouldFetch);
+  const { status, masterName } = useFetch(shouldFetch);
   const history = useHistory();
 
   useEffect(() => {
@@ -52,6 +53,7 @@ export const Home = () => {
       <Box mt={20}>
         <StyledButton
           disableElevation
+          disabled={status === FETCH_STATUS.FETCHING}
           onClick={() => setShouldFetch(true)}
           variant="contained"
           theme={theme}

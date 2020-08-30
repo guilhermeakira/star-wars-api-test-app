@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { shadows } from '@material-ui/system';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import useFetch from '../Hooks/useFetch';
 import { mapMasterToPalette, mapMasterToIcon, FETCH_STATUS } from '../constants';
@@ -26,9 +27,11 @@ const StyledButton = styled(Button)`
   text-transform: none;
 `;
 
-const StyledAvatar = styled(Avatar)`
-  height: 380px;
-  width: 380px;
+const StyledAvatar = styled(({ isMobile, ...props }) => (
+  <Avatar {...props} />
+))`
+  height: ${({ isMobile }) => isMobile? '302px' : '380px'};
+  width: ${({ isMobile }) => isMobile? '302px' : '380px'};
 `;
 
 export const Result = () => {
@@ -37,6 +40,7 @@ export const Result = () => {
   const { master } = useContext(masterContext);
   const { status, masterName } = useFetch(shouldFetch, master);
   const palette = mapMasterToPalette[masterName];
+  const isMobile = useMediaQuery('(max-width:800px)');
 
   useEffect(() => {
     if (status === FETCH_STATUS.FETCHED) {
@@ -44,8 +48,25 @@ export const Result = () => {
     }
   }, [status])
 
+  const pathButton = (
+    <StyledButton
+      onClick={() => setShouldFetch(true)}
+      disabled={status === FETCH_STATUS.FETCHING}
+      variant="contained"
+      color={palette}
+      theme={theme}
+      disableElevation
+    >
+      <Typography>
+        <b>
+          {messages.buttonLabel}
+        </b>
+      </Typography>
+    </StyledButton>
+  );
+
   return (
-    <Box height="100vh" bgcolor={`${palette}.contrastText`}>
+    <Box height="100%" minHeight="100vh" bgcolor={`${palette}.contrastText`}>
       <StyledAppBar elevation={0} color="transparent">
         <Toolbar>
           <IconButton color={palette} href="/">
@@ -57,30 +78,24 @@ export const Result = () => {
         </Toolbar>
       </StyledAppBar>
       <Box display="flex" flexDirection="column" alignItems="center">
-        <Box pt={22}>
-          <StyledButton
-            onClick={() => setShouldFetch(true)}
-            disabled={status === FETCH_STATUS.FETCHING}
-            variant="contained"
-            color={palette}
-            theme={theme}
-            disableElevation
-          >
-            <Typography>
-              <b>
-                {messages.buttonLabel}
-              </b>
-            </Typography>
-          </StyledButton>
+        {!isMobile ? (
+          <Box pt={22}>
+            {pathButton}
+          </Box>
+        ) : null}
+        <Box pt={isMobile ? 26 : 9}>
+          <StyledAvatar isMobile={isMobile} alt={masterName} src={mapMasterToIcon[masterName]} />
         </Box>
-        <Box pt={9}>
-          <StyledAvatar alt={masterName} src={mapMasterToIcon[masterName]} />
-        </Box>
-        <Box pt={5}>
+        <Box p={isMobile ? 4 : 5}>
           <Typography color={palette} variant="subtitle1">
             {messages.yourMaster}<b>{masterName}</b>
           </Typography>
         </Box>
+        {isMobile ? (
+          <Box py={4}>
+            {pathButton}
+          </Box>
+        ) : null}
       </Box>
     </Box>
   );
