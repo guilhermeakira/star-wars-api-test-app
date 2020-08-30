@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FETCH_STATUS } from '../constants';
 
-const useFetch = (shouldFetch: boolean = true, initialMaster = '') => {
+const useFetch = (shouldFetch: boolean = true, initialMaster: string = '') => {
   const [status, setStatus] = useState(FETCH_STATUS.IDLE);
   const [masterName, setMasterName] = useState(initialMaster);
 
