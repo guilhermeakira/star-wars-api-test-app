@@ -69,7 +69,7 @@ export const Result = () => {
     <Box height="100%" minHeight="100vh" bgcolor={`${palette}.contrastText`}>
       <StyledAppBar elevation={0} color="transparent">
         <Toolbar>
-          <IconButton color={palette} href="/">
+          <IconButton color={palette} href="/star-wars-api-test-app">
             <ArrowBack />
           </IconButton>
           <Typography color={palette}>
